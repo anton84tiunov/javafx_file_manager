@@ -1,0 +1,14 @@
+/* styles.css */
+.toolbar-button {
+    -fx-background-color: #336699;
+    -fx-text-fill: white;
+}
+
+.menu-bar {
+    -fx-background-color: #6699CC;
+}
+
+.tree-table-view {
+    -fx-background-color: #F0F0F0;
+}
+

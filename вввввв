@@ -1,0 +1,97 @@
+package com.example.components.left;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.TreeTableView;
+import javafx.scene.control.cell.TextFieldTreeTableCell;
+import javafx.util.converter.LongStringConverter;
+
+public class FileTreeTableView extends TreeTableView<File> {
+
+    public FileTreeTableView(File rootDirectory) {
+        TreeItem<File> rootItem = createTreeTableView(rootDirectory);
+        setRoot(rootItem);
+        
+        // Создаем столбец для отображения имен файлов
+        TreeTableColumn<File, String> nameColumn = new TreeTableColumn<>("Name");
+        nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getName()));
+        getColumns().add(nameColumn);
+        
+        // Создаем столбец для отображения путей файлов
+        TreeTableColumn<File, String> pathColumn = new TreeTableColumn<>("Path");
+        pathColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getPath()));
+        getColumns().add(pathColumn);
+        
+        // Создаем столбец для отображения размера файлов
+        TreeTableColumn<File, Long> sizeColumn = new TreeTableColumn<>("Size");
+        sizeColumn.setCellValueFactory(cellData -> {
+            File file = cellData.getValue().getValue();
+            long size = file.isDirectory() ? 0 : file.length();
+            return new SimpleLongProperty(size).asObject();
+        });
+        getColumns().add(sizeColumn);
+        
+        // Создаем столбец для отображения даты последнего изменения файлов
+        TreeTableColumn<File, String> dateColumn = new TreeTableColumn<>("Date");
+        dateColumn.setCellValueFactory(cellData -> {
+            File file = cellData.getValue().getValue();
+            long lastModified = file.lastModified();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            return new SimpleStringProperty(dateFormat.format(lastModified));
+        });
+        getColumns().add(dateColumn);
+        
+        // Устанавливаем ячейки редактируемыми
+        nameColumn.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+        pathColumn.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+        sizeColumn.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn(new LongStringConverter()));
+        dateColumn.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    }
+
+    private TreeItem<File> createTreeTableView(File rootDirectory) {
+        FileTreeItem rootItem = new FileTreeItem(rootDirectory);
+        if (rootDirectory.isDirectory()) {
+            File[] children = rootDirectory.listFiles();
+            if (children != null) {
+                for (File child : children) {
+                    rootItem.addChild(child);
+                }
+            }
+        }
+        return rootItem;
+    }
+
+    private static class FileTreeItem extends TreeItem<File> {
+
+        private boolean childrenLoaded = false;
+
+        public FileTreeItem(File file) {
+            super(file);
+        }
+
+        @Override
+        public ObservableList<TreeItem<File>> getChildren() {
+            if (!childrenLoaded && getValue().isDirectory()) {
+                childrenLoaded = true;
+                File[] children = getValue().listFiles();
+                if (children != null) {
+                    super.getChildren().clear(); // Очищаем фиктивный элемент
+                    for (File child : children) {
+                        getChildren().add(new FileTreeItem(child));
+                    }
+                }
+            }
+            return super.getChildren();
+        }
+
+        public void addChild(File childFile) {
+            FileTreeItem childItem = new FileTreeItem(childFile);
+            getChildren().add(childItem);
+        }
+    }
+}
