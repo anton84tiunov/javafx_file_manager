@@ -1,4 +1,6 @@
 /* styles.css */
+/* @import url("javafx.css"); Импорт стандартных стилей JavaFX, если это необходимо */
+
 .toolbar-button {
     -fx-background-color: #336699;
     -fx-text-fill: white;

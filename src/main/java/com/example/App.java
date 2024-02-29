@@ -1,12 +1,12 @@
 package com.example;
 
-
 import com.example.components.Content;
-import com.example.components.Menubar;              
+import com.example.components.Menubar;
 import com.example.components.Toolbar;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 // import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
@@ -18,7 +18,9 @@ public class App extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage ) {
+    public void start(Stage primaryStage) {
+
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/com/example/icons/search.png")));
         BorderPane root = new BorderPane();
 
         Menubar menuBar = new Menubar();
@@ -29,14 +31,11 @@ public class App extends Application {
         root.setCenter(content);
 
         Scene scene = new Scene(root, 800, 600);
-        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/com/example/styles.css").toExternalForm());
 
         primaryStage.setScene(scene);
         primaryStage.setTitle("File Manager");
         primaryStage.show();
     }
 
-    
 }
-
- 

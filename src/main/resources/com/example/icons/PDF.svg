@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with "sPlan" (http://www.abacom-online.de) -->
+<svg version="1.1" baseProfile="full"
+xmlns="http://www.w3.org/2000/svg"
+width="930" height="928">
+<title>sPlan</title>
+<defs>
+<style type="text/css">
+<![CDATA[
+polyline {stroke-linecap:round; stroke-linejoin:round}
+polygon {stroke-linecap:round; stroke-linejoin:round}
+path {stroke-linecap:round; stroke-linejoin:round}
+circle {stroke-linecap:round; stroke-linejoin:round}
+]]>
+</style>
+</defs>
+<path fill="rgb(255,255,255)" stroke="rgb(0,0,0)" stroke-width="100" d=" M 40 161 C 40 40 161 40 161 40 L 769 40 L 769 40 C 890 40 890 161 890 161 L 890 767 L 890 767 C 890 888 769 888 769 888 L 161 888 L 161 888 C 40 888 40 767 40 767 L 40 161 Z" />
+<text x="115.00" y="564.00" font-family ="Tahoma" font-size ="278pt" font-weight="bold" font-style="normal" fill="rgb(0,0,0)" transform=" rotate(0.000) scale(1.000,1.000)">PDF</text>
+</svg>

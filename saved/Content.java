@@ -18,8 +18,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 public class Content extends SplitPane {
-
-    public Content() {
+    
+    public Content(){
 
         // Создаем кисть для фона
         BackgroundFill backgroundFill = new BackgroundFill(Color.rgb(0, 255, 255), null, null);
@@ -36,9 +36,8 @@ public class Content extends SplitPane {
         CheckBox hideShowCheckBox = new CheckBox("скрытые");
         // Обработчик изменения состояния CheckBox
         hideShowCheckBox.setOnAction(event -> {
-            // boolean showHidden = hideShowCheckBox.isSelected();
-            // Передаем информацию о том, нужно ли показывать скрытые файлы и папки в
-            // FileTreeTableView
+            boolean showHidden = hideShowCheckBox.isSelected();
+            // Передаем информацию о том, нужно ли показывать скрытые файлы и папки в FileTreeTableView
             // fileTreeTableView.setShowHiddenFiles(showHidden);
         });
 
@@ -49,16 +48,11 @@ public class Content extends SplitPane {
         // Создаем меню и добавляем в него пункт с CheckBox
         MenuButton hideShowMenuButton = new MenuButton("...", null, checkBoxMenuItem);
 
-        ToolBar ltoolbar = new ToolBar(new Button("<<"), new Button(">>"), hideShowMenuButton);
-        ltoolbar.setBackground(background);
-        VBox lVBox = new VBox(ltoolbar, fileTreeTableView);
+        ToolBar toolbar = new ToolBar(new Button("<<"), new Button(">>"), hideShowMenuButton);
+        toolbar.setBackground(background);
+        VBox lVBox = new VBox(toolbar, fileTreeTableView);
+
         VBox.setVgrow(fileTreeTableView, Priority.ALWAYS);
-
-        ToolBar rtoolbar = new ToolBar(hideShowMenuButton);
-        rtoolbar.setBackground(background);
-        VBox rVBox = new VBox(tabPane);
-        VBox.setVgrow(tabPane, Priority.ALWAYS);
-
-        getItems().addAll(lVBox, rVBox);
+        getItems().addAll(lVBox, tabPane);
     }
 }

@@ -1,7 +1,10 @@
 com/example/App.class
+com/example/components/Menubar.class
+com/example/components/left/FileTreeItem.class
+com/example/components/right/FileTableView.class
 module-info.class
 com/example/components/Toolbar.class
-com/example/components/left/FileTreeTableView$FileTreeItem.class
+com/example/components/right/FileTabsPane.class
 com/example/components/left/FileTreeTableView.class
 com/example/components/Content.class
-com/example/components/Menubar.class
+com/example/components/left/FileTreeTabPane.class

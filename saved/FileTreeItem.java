@@ -20,6 +20,8 @@ public class FileTreeItem extends TreeItem<File> {
             }
         }
 
+
+        
         // Переопределяем свойство раскрытия узла
         expandedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue && !isLeaf()) {
@@ -28,9 +30,11 @@ public class FileTreeItem extends TreeItem<File> {
             }
         });
 
+      
+
     }
 
-    public void setOnRightMouseClicked(EventHandler<MouseEvent> handler) {
+     public void setOnRightMouseClicked(EventHandler<MouseEvent> handler) {
         addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (event.getButton() == MouseButton.SECONDARY) {
                 handler.handle(event);
